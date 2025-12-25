@@ -287,3 +287,22 @@ themeBtn.addEventListener("click", () => {
     themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Mode Clair';
   }
 });
+
+const burgerBtn = document.getElementById("burgerBtn");
+const sidebar = document.querySelector(".sidebar");
+const mobileOverlay = document.getElementById("mobileOverlay");
+
+function toggleMenu() {
+  sidebar.classList.toggle("active");
+  mobileOverlay.classList.toggle("active");
+}
+
+burgerBtn.addEventListener("click", toggleMenu);
+mobileOverlay.addEventListener("click", toggleMenu);
+document.querySelectorAll(".menu li").forEach((item) => {
+  item.addEventListener("click", () => {
+    if (window.innerWidth < 768) {
+      toggleMenu();
+    }
+  });
+});

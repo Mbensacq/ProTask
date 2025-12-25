@@ -25,9 +25,14 @@
 
         <main class="main-content">
             <header>
-                <div>
-                    <h1 id="headerDate" style="text-transform: capitalize;">Chargement...</h1>
-                    <p style="color: var(--text-grey);">Voici tes objectifs.</p>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button id="burgerBtn" class="mobile-only" aria-label="Ouvrir le menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div>
+                        <h1 id="headerDate" style="text-transform: capitalize;">Chargement...</h1>
+                        <p style="color: var(--text-grey);">Voici tes objectifs.</p>
+                    </div>
                 </div>
             </header>
 
@@ -75,6 +80,8 @@
             </section>
         </main>
     </div>
+
+    <div id="mobileOverlay" class="overlay-mobile"></div>
 
     <div id="confirmationModal" class="modal-overlay">
         <div class="modal-box">
