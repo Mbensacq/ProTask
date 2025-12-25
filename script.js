@@ -1,13 +1,11 @@
-// --- 1. SÉLECTION DOM ---
 const taskInput = document.getElementById("taskInput");
-const descInput = document.getElementById("descInput"); // Nouveau
+const descInput = document.getElementById("descInput");
 const dateInput = document.getElementById("dateInput");
 const priorityInput = document.getElementById("priorityInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 const listTitle = document.querySelector(".tasks-wrapper h2");
 
-// Stats & Filtres
 const totalSpan = document.getElementById("totalCount");
 const pendingSpan = document.getElementById("pendingCount");
 const doneSpan = document.getElementById("doneCount");
@@ -18,12 +16,10 @@ const filterButtons = {
   completed: document.getElementById("filter-completed"),
 };
 
-// Modales
 const confirmModal = document.getElementById("confirmationModal");
-const editModal = document.getElementById("editModal"); // Nouveau
-let currentActionId = null; // ID utilisé pour supression OU édition
+const editModal = document.getElementById("editModal");
+let currentActionId = null;
 
-// --- 2. STATE ---
 let tasks = JSON.parse(localStorage.getItem("proTask_db")) || [];
 let currentFilter = "all";
 
@@ -34,8 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateStats();
   setupFilters();
 });
-
-// --- 3. FONCTIONS PRINCIPALES ---
 
 function addTask() {
   const text = taskInput.value.trim();
@@ -48,7 +42,7 @@ function addTask() {
   const newTask = {
     id: Date.now(),
     text: text,
-    description: desc, // On sauvegarde la description
+    description: desc,
     priority: priority,
     dueDate: date,
     completed: false,
@@ -63,9 +57,8 @@ function addTask() {
     updateStats();
   }
 
-  // Reset Form
   taskInput.value = "";
-  descInput.value = ""; // Reset description
+  descInput.value = "";
   dateInput.valueAsDate = new Date();
   taskInput.focus();
 }
@@ -76,7 +69,6 @@ function renderTasks() {
 
   const filteredTasks = tasks.filter((task) => {
     if (currentFilter === "all") return true;
-    // LOGIQUE "À FAIRE" : Aujourd'hui + Retards
     if (currentFilter === "today") {
       return (
         task.dueDate === todayStr ||
@@ -90,7 +82,6 @@ function renderTasks() {
   updateListTitle(filteredTasks.length);
 
   if (filteredTasks.length === 0) {
-    // Empty State joli
     taskList.innerHTML = `
             <div style="text-align:center; padding: 40px; color:var(--text-grey);">
                 <i class="fa-solid fa-mug-hot" style="font-size: 2rem; margin-bottom: 10px;"></i>
@@ -107,7 +98,6 @@ function renderTasks() {
     }`;
     li.setAttribute("data-id", task.id);
 
-    // Calcul du retard
     const isOverdue = task.dueDate < todayStr && !task.completed;
     const dateDisplay = task.dueDate
       ? new Date(task.dueDate).toLocaleDateString("fr-FR")
@@ -159,15 +149,11 @@ function renderTasks() {
   });
 }
 
-// --- 4. INTERACTIONS NOUVELLES ---
-
-// Ouvrir/Fermer la description
 window.toggleDesc = function (id) {
   const descDiv = document.getElementById(`desc-${id}`);
   descDiv.classList.toggle("show");
 };
 
-// Ouvrir la modale d'édition
 window.openEditModal = function (id) {
   const task = tasks.find((t) => t.id === id);
   if (!task) return;
@@ -181,7 +167,6 @@ window.openEditModal = function (id) {
   editModal.classList.add("active");
 };
 
-// Sauvegarder l'édition
 document.getElementById("saveEditBtn").addEventListener("click", () => {
   if (currentActionId === null) return;
 
@@ -205,9 +190,6 @@ document.getElementById("cancelEditBtn").addEventListener("click", () => {
   currentActionId = null;
 });
 
-// --- 5. LOGIQUE EXISTANTE (Confettis, Delete, Drag, etc.) ---
-
-// Delete Modal
 window.confirmDelete = function (id) {
   currentActionId = id;
   confirmModal.classList.add("active");
@@ -227,7 +209,6 @@ document.getElementById("cancelBtn").addEventListener("click", () => {
   currentActionId = null;
 });
 
-// Toggle (Check) + Confetti
 window.toggleTask = function (event, id) {
   if (event) event.stopPropagation();
   const task = tasks.find((t) => t.id === id);
@@ -256,7 +237,6 @@ function triggerConfetti(x, y) {
   });
 }
 
-// Utilitaires
 function saveData() {
   localStorage.setItem("proTask_db", JSON.stringify(tasks));
 }
@@ -298,7 +278,6 @@ function updateHeaderDate() {
 }
 setInterval(updateHeaderDate, 1000);
 
-// Drag & Drop
 function addDragEvents(li) {
   li.addEventListener("dragstart", () => li.classList.add("dragging"));
   li.addEventListener("dragend", () => {
@@ -337,9 +316,7 @@ function updateOrder() {
   saveData();
 }
 
-// Events Initiaux
 addBtn.addEventListener("click", addTask);
-// Mobile Menu
 const burgerBtn = document.getElementById("burgerBtn");
 const sidebar = document.querySelector(".sidebar");
 const mobileOverlay = document.getElementById("mobileOverlay");
@@ -355,7 +332,6 @@ document.querySelectorAll(".menu li").forEach((item) => {
   });
 });
 
-// Dark Mode logic
 const themeBtn = document.getElementById("theme-toggle");
 const body = document.body;
 if (localStorage.getItem("proTask_theme") === "dark") {

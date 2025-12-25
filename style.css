@@ -37,8 +37,6 @@ body {
   display: flex;
   height: 100%;
 }
-
-/* Sidebar */
 .sidebar {
   width: 250px;
   background: var(--sidebar-bg);
@@ -84,7 +82,6 @@ body {
   background-color: #3a3b3c;
 }
 
-/* Main Content */
 .main-content {
   flex: 1;
   padding: 30px;
@@ -96,8 +93,6 @@ header {
 h1 {
   font-size: 1.8rem;
 }
-
-/* KPI Stats */
 .stats-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -138,8 +133,6 @@ h1 {
   font-size: 1.5rem;
   font-weight: 700;
 }
-
-/* Input Section améliorée */
 .input-section {
   display: flex;
   flex-direction: column;
@@ -180,8 +173,6 @@ textarea {
 #addBtn:hover {
   opacity: 0.9;
 }
-
-/* Task List & Animations */
 .task-list {
   list-style: none;
   padding-bottom: 50px;
@@ -196,7 +187,7 @@ textarea {
   box-shadow: var(--card-shadow);
   border-left: 5px solid transparent;
   cursor: grab;
-  animation: slideIn 0.3s ease-out; /* Animation apparition */
+  animation: slideIn 0.3s ease-out;
 }
 @keyframes slideIn {
   from {
@@ -217,7 +208,7 @@ textarea {
 .task-content {
   flex: 1;
   cursor: pointer;
-} /* Le curseur indique qu'on peut cliquer */
+}
 .task-text {
   font-weight: 500;
   font-size: 1.05rem;
@@ -230,8 +221,6 @@ textarea {
   align-items: center;
   gap: 10px;
 }
-
-/* Badge Overdue (En retard) */
 .badge-overdue {
   background: #fee2e2;
   color: #ef4444;
@@ -244,7 +233,6 @@ textarea {
   background: #450a0a;
 }
 
-/* Description cachée */
 .task-desc {
   max-height: 0;
   overflow: hidden;
@@ -263,8 +251,6 @@ textarea {
   padding-top: 10px;
   border-top-color: #e5e7eb;
 }
-
-/* Actions Buttons */
 .task-actions button {
   background: none;
   border: none;
@@ -284,7 +270,6 @@ textarea {
   color: #10b981;
 }
 
-/* Priorities */
 .priority-high {
   border-left-color: var(--danger) !important;
 }
@@ -300,14 +285,10 @@ textarea {
 .completed .task-text {
   text-decoration: line-through;
 }
-
-/* Dragging */
 .task-item.dragging {
   opacity: 0.5;
   border: 2px dashed var(--primary);
 }
-
-/* MODALS */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -379,8 +360,6 @@ textarea {
   display: flex;
   gap: 10px;
 }
-
-/* Responsive */
 .mobile-only,
 .overlay-mobile {
   display: none;
